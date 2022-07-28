@@ -10,9 +10,9 @@ const {
 } = require("../controllers/userController");
 
 router.route("/").get(authenticateUser, authorizePermissions("admin"), getAllUsers);
-router.route("/showMe").get(showCurrentUser);
-router.route("/updateUser").patch(updateUser);
-router.route("/updateUserPassword").patch(updateUserPassword);
+router.route("/showMe").get(authenticateUser, showCurrentUser);
+router.route("/updateUser").patch(authenticateUser, updateUser);
+router.route("/updateUserPassword").patch(authenticateUser, updateUserPassword);
 // "/:id" must go below because otherwise the route "showMe" generates a conflict
 router.route("/:id").get(authenticateUser, getSingleUser);
 
